@@ -74,11 +74,10 @@ fun SettingScreen() {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
 
-                        // Preview-safe icon
                         Icon(
                             painter = painterResource(id = R.drawable.silent_icon),
                             contentDescription = "Silent Mode",
-                            tint = Color.Unspecified, // keeps original icon color
+                            tint = Color.Unspecified,
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(12.dp))

@@ -76,7 +76,6 @@ fun CalibrationScreen(
                 onResetClick = { calibrationValue = 50f }
             )
 
-            // Bottom Buttons (Fixed at bottom)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

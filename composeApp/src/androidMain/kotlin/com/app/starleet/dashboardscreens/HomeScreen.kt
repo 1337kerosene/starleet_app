@@ -168,7 +168,7 @@ private fun SmoothChart(
 
             val spacing = width / (points.size - 1)
 
-            // GRID
+
             val gridColor = White.copy(0.15f)
 
             for (i in 0..2) {
@@ -250,7 +250,7 @@ private fun SmoothChart(
             }
         }
 
-        // X Axis dynamic from ArrayList
+
         Row(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -293,7 +293,7 @@ fun CurrentLactateCard() {
             modifier = Modifier.padding(16.dp)
         ) {
 
-            // Header
+
             Text(
                 text = "Current Lactate",
                 color = colorResource(id = R.color.lightskyblue),
@@ -345,7 +345,6 @@ fun HistoryCard(
 
     ) {
 
-        // Header Row
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -359,7 +358,7 @@ fun HistoryCard(
                 fontWeight = FontWeight.SemiBold
             )
 
-            // Today Dropdown Button
+
             Row(
                 modifier = Modifier
                     .border(
@@ -385,7 +384,7 @@ fun HistoryCard(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-        // Card Container
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -401,7 +400,6 @@ fun HistoryCard(
                 .padding(vertical = 12.dp)
         ) {
 
-            // Table Header
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
