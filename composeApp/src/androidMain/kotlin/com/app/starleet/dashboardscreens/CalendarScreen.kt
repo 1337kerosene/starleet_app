@@ -23,11 +23,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.app.starleet.R
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
@@ -70,7 +74,8 @@ fun CalendarScreen() {
         // Calendar Header
         Text(
             text = "Scan History",
-            color = Color.White,
+            color = colorResource(id = R.color.whitecolor),
+            fontFamily = FontFamily(Font(R.font.manrope_bold)),
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold
         )
@@ -232,8 +237,8 @@ fun CalendarScreen() {
                 // Scan History Header
                 Text(
                     text = "Monday 08, Dec",
-                    color = Color.White,
-                    fontSize = 18.sp,
+                    color = colorResource(id = R.color.graycolor),
+                    fontFamily = FontFamily(Font(R.font.manrope_semibold)),                    fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold
                 )
 
@@ -241,8 +246,8 @@ fun CalendarScreen() {
 
                 Text(
                     text = "3 Scans Recorded",
-                    color = Color.LightGray,
-                    fontSize = 14.sp,
+                    color = colorResource(id = R.color.graylightcolorAFAFAF),
+                    fontFamily = FontFamily(Font(R.font.manrope_regular)),                    fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold
                 )
 
@@ -255,8 +260,8 @@ fun CalendarScreen() {
                     items(
                         listOf(
                             ScanData("07:32 AM", "Lactose: 2.0 mM", Color(0xFF2F8D91)),
-                            ScanData("07:32 AM", "Lactose: 2.0 mM", Color(0xFF2F8D91)),
-                            ScanData("07:37 AM", "Lactose: 2.0 mM", Color(0xFF2F8D91))
+                            ScanData("07:32 AM", "Lactose: 2.0 mM", Color(0xFFE03675)),
+                            ScanData("07:37 AM", "Lactose: 2.0 mM", Color(0xFF87E64C))
                         )
                     ) { scan ->
                         ScanItem(scan = scan)

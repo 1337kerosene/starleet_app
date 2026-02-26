@@ -9,22 +9,24 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.app.starleet.R
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 
 @Composable
-fun SensorScreen() {
+fun SensorScreen(onBiasClick: () -> Unit, oncalibrationClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,7 +38,8 @@ fun SensorScreen() {
 
         Text(
             text = "Sensor Calibration",
-            color = Color.White,
+            color = colorResource(id = R.color.whitecolor),
+            fontFamily = FontFamily(Font(R.font.manrope_bold)),
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold
         )
@@ -45,50 +48,59 @@ fun SensorScreen() {
 
         ButtonWithArrow(
             label = "Bias",
-            onClick = { }
+            onClick = {onBiasClick() }
         )
 
         ButtonWithArrow(
             label = "Calibration",
-            onClick = { }
+            onClick = {oncalibrationClick() }
+
+
         )
     }
 }
 @Composable
 fun ButtonWithArrow(label: String, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        shape = RoundedCornerShape(8.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF333333)
-        ),
+
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp)
+            .background(
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        Color(0xFF1B1E21),
+                        Color(0xFF1F2F2F)
+                    )
+                ),
+                shape = RoundedCornerShape(12.dp)
+            )
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically // ✅ FIX
+
+        Button(
+            onClick = onClick,
+            shape = RoundedCornerShape(20.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Transparent
+            ),
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Text(
-                text = label,
-                color = Color.White
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = label,
+                    color = colorResource(id = R.color.whitecolor),
+                    fontFamily = FontFamily(Font(R.font.manrope_semibold)),                )
 
-            Icon(
-                painter = painterResource(id = R.drawable.graterthen_icon),
-                contentDescription = "Arrow",
-                tint = Color.White
-            )
+                Icon(
+                    painter = painterResource(id = R.drawable.graterthenbig_icon),
+                    contentDescription = "Arrow",
+                    tint = Color.White
+                )
+            }
         }
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun SensorPreview() {
-    MaterialTheme {
-        SensorScreen()
     }
 }

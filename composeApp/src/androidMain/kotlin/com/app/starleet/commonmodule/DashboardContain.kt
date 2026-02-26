@@ -10,13 +10,13 @@ import com.app.starleet.dashboardscreens.CalendarScreen
 import com.app.starleet.dashboardscreens.HomeScreen
 import com.app.starleet.dashboardscreens.ScanScreen
 import com.app.starleet.dashboardscreens.SensorScreen
-import com.app.starleet.ui.dashboard.screens.SettingScreen
+import com.app.starleet.dashboardscreens.SettingScreen
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 
-fun DashboardContain() {
+fun DashboardContain(onBiasClick: () -> Unit, oncalibrationClick: () -> Unit) {
 
     var selectedIndex by remember { mutableStateOf(0) }
 
@@ -42,7 +42,7 @@ fun DashboardContain() {
             0 -> HomeScreen()
             1 -> CalendarScreen()
             2 -> ScanScreen()
-            3 -> SensorScreen()
+            3 -> SensorScreen(onBiasClick = onBiasClick, oncalibrationClick = oncalibrationClick)
             4 -> SettingScreen()
         }
     }

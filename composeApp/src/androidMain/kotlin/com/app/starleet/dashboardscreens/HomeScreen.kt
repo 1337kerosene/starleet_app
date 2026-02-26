@@ -1,41 +1,37 @@
 package com.app.starleet.dashboardscreens
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import com.app.starleet.R
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.graphics.Color.Companion.Gray
-import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import com.app.starleet.R
+
 
 data class ChartPoint(
     val label: String,
@@ -66,7 +62,8 @@ fun HomeScreen() {
     ) {
         Text(
             text = "Overview",
-            color = White,
+            color = colorResource(id = R.color.whitecolor),
+            fontFamily = FontFamily(Font(R.font.manrope_bold)),
             style = MaterialTheme.typography.titleLarge
         )
 
@@ -91,6 +88,7 @@ fun HomeScreen() {
             ),
             maxValue = 4f
         )
+
         TrendChartCard(staticChartData, modifier = Modifier)
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -101,7 +99,6 @@ fun HomeScreen() {
             HistoryItem("07:40", "2.9 mM"),
             HistoryItem("07:48", "2.5 mM")
         )
-
 
         HistoryCard(historyList)
 
@@ -134,14 +131,14 @@ fun TrendChartCard(
             Row {
                 Text(
                     text = chartData.title,
-                    color = Color.White,
+                    color = White,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
                     text = "(${chartData.subtitle})",
-                    color = Color.White.copy(0.6f),
+                    color = White.copy(0.6f),
                     fontSize = 13.sp
                 )
             }
@@ -172,7 +169,7 @@ private fun SmoothChart(
             val spacing = width / (points.size - 1)
 
             // GRID
-            val gridColor = Color.White.copy(0.15f)
+            val gridColor = White.copy(0.15f)
 
             for (i in 0..2) {
                 val y = height - (height / 2f * i)
@@ -247,7 +244,7 @@ private fun SmoothChart(
             for (i in steps - 1 downTo 0) {
                 Text(
                     text = "${(stepValue * i).toInt()}m",
-                    color = Color.White.copy(0.6f),
+                    color = White.copy(0.6f),
                     fontSize = 12.sp
                 )
             }
@@ -263,7 +260,7 @@ private fun SmoothChart(
             points.forEach {
                 Text(
                     text = it.label,
-                    color = Color.White.copy(0.6f),
+                    color = White.copy(0.6f),
                     fontSize = 12.sp
                 )
             }
@@ -273,73 +270,71 @@ private fun SmoothChart(
 
 @Composable
 fun CurrentLactateCard() {
+
+    val cardShape = RoundedCornerShape(15.dp)
+
     Card(
-        shape = RoundedCornerShape(15.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF333333)), // Dark gray background
+        shape = cardShape,
+        colors = CardDefaults.cardColors(
+            containerColor = Color.Transparent
+        ),
         modifier = Modifier
             .fillMaxWidth()
-
-            .shadow(4.dp, shape = RoundedCornerShape(15.dp)) // Added shadow for elevation
+            .shadow(4.dp, shape = cardShape)
+            .background(
+                brush = Brush.linearGradient(
+                    listOf(Color(0xFF1B1E21), Color(0xFF1F2F2F))
+                ),
+                shape = RoundedCornerShape(20.dp)
+            )
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(15.dp))
-                .background(
-                    Brush.horizontalGradient(
-                        colorStops = arrayOf(
-                            0.0f to Color(0xFF24A19D),                 // Teal
-                            0.5f to Color(0xFF454545),                 // Dark Gray
-                            1.0f to Color(0xFF000000).copy(alpha = 0.20f) // 20% black
-                        )
-                    )
-                )
-        )
 
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
 
-        // 👉 Your content goes here
-        Column(modifier = Modifier.padding(16.dp)) {
-            // Current Lactate Header
+            // Header
             Text(
                 text = "Current Lactate",
-                color = Color(0xFF00E5B0), // Teal color for the header
-                fontSize = 13.sp
+                color = colorResource(id = R.color.lightskyblue),
+                fontSize = 13.sp,
+                fontFamily = FontFamily(Font(R.font.manrope_regular))
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Lactate Value and Status on a Single Line
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Lactate value
+
                 Text(
                     text = "0.1 mM",
                     fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = White
+                    color = colorResource(id = R.color.whitecolor),
+                    fontFamily = FontFamily(Font(R.font.manrope_semibold))
                 )
 
-                Spacer(modifier = Modifier.width(8.dp)) // Add space between lactate value and status
+                Spacer(modifier = Modifier.width(8.dp))
 
-                // Status (No Sweat)
                 Text(
                     text = "No Sweat",
                     fontSize = 12.sp,
-                    color = Gray
+                    color = colorResource(id = R.color.graycolor),
+                    fontFamily = FontFamily(Font(R.font.manrope_regular))
                 )
             }
 
-            // Difference from Last scan
+            Spacer(modifier = Modifier.height(6.dp))
+
             Text(
                 text = "↓ 0.3 mM vs Last scan",
                 fontSize = 12.sp,
-                color = Gray
+                color = colorResource(id = R.color.graycolor),
+                fontFamily = FontFamily(Font(R.font.manrope_regular))
             )
         }
     }
 }
-
 
 @Composable
 fun HistoryCard(
@@ -359,8 +354,8 @@ fun HistoryCard(
 
             Text(
                 text = "History",
-                color = Color.White,
-                fontSize = 20.sp,
+                color = colorResource(id = R.color.whitecolor),
+                fontFamily = FontFamily(Font(R.font.manrope_semibold)),
                 fontWeight = FontWeight.SemiBold
             )
 
@@ -369,7 +364,7 @@ fun HistoryCard(
                 modifier = Modifier
                     .border(
                         width = 1.dp,
-                        color = Color.White.copy(alpha = 0.2f),
+                        color = White.copy(alpha = 0.2f),
                         shape = RoundedCornerShape(10.dp)
                     )
                     .padding(horizontal = 12.dp, vertical = 6.dp),
@@ -377,20 +372,19 @@ fun HistoryCard(
             ) {
                 Text(
                     text = "Today",
-                    color = Color.White,
-                    fontSize = 14.sp
+                    color = colorResource(id = R.color.graylightcolorAFAFAF),
+                    fontFamily = FontFamily(Font(R.font.manrope_medium)),                          fontSize = 14.sp
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowDown,
                     contentDescription = null,
-                    tint = Color.White
+                    tint = White
                 )
             }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-
         // Card Container
         Column(
             modifier = Modifier
@@ -416,13 +410,13 @@ fun HistoryCard(
             ) {
                 Text(
                     text = "Time",
-                    color = Color.White.copy(0.6f),
-                    fontSize = 14.sp
+                    color = colorResource(id = R.color.graymidcolor),
+                    fontFamily = FontFamily(Font(R.font.manrope_medium)),                    fontSize = 14.sp
                 )
                 Text(
                     text = "Lactate",
-                    color = Color.White.copy(0.6f),
-                    fontSize = 14.sp
+                    color = colorResource(id = R.color.graymidcolor),
+                    fontFamily = FontFamily(Font(R.font.manrope_medium)),                          fontSize = 14.sp
                 )
             }
 
@@ -439,7 +433,7 @@ fun HistoryCard(
 
                     Text(
                         text = item.time,
-                        color = Color.White,
+                        color = White,
                         fontSize = 16.sp
                     )
 
@@ -449,7 +443,7 @@ fun HistoryCard(
 
                         Text(
                             text = item.lactate,
-                            color = Color.White,
+                            color = White,
                             fontSize = 16.sp
                         )
 
@@ -458,7 +452,7 @@ fun HistoryCard(
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowRight,
                             contentDescription = null,
-                            tint = Color.White.copy(0.7f)
+                            tint = White.copy(0.7f)
                         )
                     }
                 }
@@ -477,7 +471,7 @@ private fun DividerLine() {
         modifier = Modifier
             .fillMaxWidth()
             .height(1.dp)
-            .background(Color.White.copy(alpha = 0.08f))
+            .background(White.copy(alpha = 0.08f))
     )
 }
 
