@@ -186,7 +186,7 @@ struct LactoseRow: View {
                 Text(entry.time)
                     .foregroundColor(.white.opacity(0.6))
                     .font(.system(size: 14))
-                Text("Lactose: \(entry.value, specifier: "%.1f") mM")
+                Text("Lactate: \(entry.value, specifier: "%.1f") mM")
                     .foregroundColor(.white.opacity(0.6))
                     .font(.system(size: 18, weight: .medium))
             }

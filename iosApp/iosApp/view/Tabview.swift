@@ -20,14 +20,17 @@ struct Tabview: View {
                         ScanHistoryView()
                         
                     case 2:
-                        ScanHistoryView()
+                        WifiScanView()
+                        
+                    case 3:
+                        SensorCalibrationView()
+                        
+//                    case 4:
+//                        SettingView()
 
-                    case 2:
-                        Text("home")
-                                    .foregroundStyle(Color.white)
-                                    default:
+                  
+                    default:
                         EmptyView()
-               
                     }
                 }
                 TabBarViewModel(selectedTab: $selectedTab)
@@ -64,14 +67,10 @@ struct TabBarViewModel: View {
                     imageName: "scan",
                     isSelected: selectedTab == 2
                 ) { selectedTab = 2 }
-                           TabBarModel(
-                    imageName: "data",
-                    isSelected: selectedTab == 3
-                ) { selectedTab = 3 }
                 TabBarModel(
                     imageName: "setting",
-                    isSelected: selectedTab == 4
-                ) { selectedTab = 4 }
+                    isSelected: selectedTab == 3
+                ) { selectedTab = 3 }
             }
 
         }
