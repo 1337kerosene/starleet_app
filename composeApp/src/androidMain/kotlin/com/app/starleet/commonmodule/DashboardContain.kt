@@ -15,17 +15,19 @@ import com.app.starleet.dashboardscreens.SettingScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-
-fun DashboardContain(onBiasClick: () -> Unit, oncalibrationClick: () -> Unit) {
-
-    var selectedIndex by remember { mutableStateOf(0) }
+fun DashboardContain(
+    selectedIndex: Int,
+    onTabSelected: (Int) -> Unit,
+    onBiasClick: () -> Unit,
+    oncalibrationClick: () -> Unit
+) {
 
     val items = listOf(
         BottomNavigationItemData("Home", R.drawable.icon_home, R.drawable.icon_home),
         BottomNavigationItemData("Calendar", R.drawable.icon_calendar, R.drawable.icon_calendar),
         BottomNavigationItemData("Profile", R.drawable.icon_wifi, R.drawable.icon_wifi),
-        BottomNavigationItemData("Profile", R.drawable.icon_sensor, R.drawable.icon_sensor),
-        BottomNavigationItemData("Profile", R.drawable.icon_setting, R.drawable.icon_setting),
+        BottomNavigationItemData("Sensor", R.drawable.icon_sensor, R.drawable.icon_sensor),
+        BottomNavigationItemData("Setting", R.drawable.icon_setting, R.drawable.icon_setting),
     )
 
     Scaffold(
@@ -34,15 +36,19 @@ fun DashboardContain(onBiasClick: () -> Unit, oncalibrationClick: () -> Unit) {
             CustomBottomBar(
                 items = items,
                 selectedIndex = selectedIndex,
-                onItemSelected = { selectedIndex = it }
+                onItemSelected = { onTabSelected(it) }
             )
         }
     ) { padding ->
+
         when (selectedIndex) {
             0 -> HomeScreen()
             1 -> CalendarScreen()
             2 -> ScanScreen()
-            3 -> SensorScreen(onBiasClick = onBiasClick, oncalibrationClick = oncalibrationClick)
+            3 -> SensorScreen(
+                onBiasClick = onBiasClick,
+                oncalibrationClick = oncalibrationClick
+            )
             4 -> SettingScreen()
         }
     }

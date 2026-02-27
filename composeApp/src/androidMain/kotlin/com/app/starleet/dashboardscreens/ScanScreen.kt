@@ -89,7 +89,7 @@ fun ScanScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(55.dp)
-                    .clip(RoundedCornerShape(12.dp)),
+                    .clip(RoundedCornerShape(10.dp)),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF2BA39A)
                 )

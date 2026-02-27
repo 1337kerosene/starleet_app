@@ -43,7 +43,7 @@ fun BaisScreen(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back_arrow),
                             contentDescription = "Back",
-                            tint = Color.White
+                            tint = Color.Unspecified,
                         )
                     }
                 },

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -46,9 +47,10 @@ fun CalibrationScreen(
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            painter = painterResource(id = R.drawable.ic_back_arrow),
                             contentDescription = "Back",
-                            tint = Color.White
+                            tint = Color.Unspecified,
+
                         )
                     }
                 },
@@ -64,8 +66,7 @@ fun CalibrationScreen(
                 .fillMaxSize()
                 .background(Color(0xFF0E0E0E))
                 .padding(innerPadding)
-                .padding(16.dp)
-                .navigationBarsPadding(),
+                .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
 

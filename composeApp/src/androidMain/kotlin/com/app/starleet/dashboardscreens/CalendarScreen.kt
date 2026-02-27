@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -109,9 +110,9 @@ fun CalendarScreen() {
                         currentMonth = currentMonth.minusMonths(1)
                     }) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            painter = painterResource(id = R.drawable.back_calendar_icon),
                             contentDescription = "Previous",
-                            tint = Color.White
+                            tint = Color.Unspecified,
                         )
                     }
 
@@ -131,10 +132,11 @@ fun CalendarScreen() {
                         currentMonth = currentMonth.plusMonths(1)
                     }) {
                         Icon(
-                            imageVector = Icons.Default.ArrowForward,
+                            painter = painterResource(id = R.drawable.go_calendar_icon),
                             contentDescription = "Next",
-                            tint = Color.White
-                        )
+                            tint = Color.Unspecified,
+
+                            )
                     }
                 }
 

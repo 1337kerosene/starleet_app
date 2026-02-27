@@ -107,6 +107,8 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+drawable back_calendar_icon
+drawable go_calendar_icon
 drawable graterthen_icon
 drawable graterthenbig_icon
 drawable ic_back_arrow
