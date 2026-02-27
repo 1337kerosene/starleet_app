@@ -176,7 +176,7 @@ struct ScansRecordedView:View {
     }
 }
 struct LactoseRow: View {
-    let entry: LactoseEntry
+    let entry: LactateEntry
     var body: some View {
         HStack(spacing: 12) {
             RoundedRectangle(cornerRadius: 3)
