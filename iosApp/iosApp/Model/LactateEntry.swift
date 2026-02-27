@@ -7,7 +7,7 @@
 import AVFoundation
 import SwiftUI
 
-struct LactoseEntry: Identifiable {
+struct LactateEntry: Identifiable {
     let id = UUID()
     let time: String
     let value: Double

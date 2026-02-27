@@ -147,10 +147,10 @@ struct CalenderView: View {
     }
 }
 struct ScansRecordedView:View {
-    let sampleData: [LactoseEntry] = [
-        LactoseEntry(time: "07:32 AM", value: 2.0, color: Color.greenBg),
-        LactoseEntry(time: "07:32 AM", value: 2.0, color: Color.lightPink),
-        LactoseEntry(time: "07:32 AM", value: 2.0, color: .green)
+    let sampleData: [LactateEntry] = [
+        LactateEntry(time: "07:32 AM", value: 2.0, color: Color.greenBg),
+        LactateEntry(time: "07:32 AM", value: 2.0, color: Color.lightPink),
+        LactateEntry(time: "07:32 AM", value: 2.0, color: .green)
     ]
     var body: some View {
         VStack(alignment: .leading,spacing:20){
