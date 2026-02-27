@@ -23,11 +23,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.app.starleet.R
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
@@ -44,17 +48,16 @@ fun CalendarScreen() {
     val firstDayOfMonth = currentMonth.atDay(1)
     val daysInMonth = currentMonth.lengthOfMonth()
 
-    // Adjust so week starts from Sunday
+
     val startOffset = (firstDayOfMonth.dayOfWeek.value % 7)
 
     val daysList = mutableListOf<LocalDate?>()
 
-    // Add empty spaces before first day
+
     repeat(startOffset) {
         daysList.add(null)
     }
 
-    // Add actual days
     for (day in 1..daysInMonth) {
         daysList.add(currentMonth.atDay(day))
     }
@@ -67,10 +70,11 @@ fun CalendarScreen() {
             .padding(16.dp)
     ) {
 
-        // Calendar Header
+
         Text(
             text = "Scan History",
-            color = Color.White,
+            color = colorResource(id = R.color.whitecolor),
+            fontFamily = FontFamily(Font(R.font.manrope_bold)),
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold
         )
@@ -95,7 +99,6 @@ fun CalendarScreen() {
 
             Column {
 
-                // Header (Month + Arrows)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -137,7 +140,7 @@ fun CalendarScreen() {
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Days of week header
+
                 val daysOfWeek = DayOfWeek.values()
 
                 Row(
@@ -157,7 +160,7 @@ fun CalendarScreen() {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Calendar Grid
+
                 daysList.chunked(7).forEach { week ->
 
                     Row(
@@ -201,7 +204,7 @@ fun CalendarScreen() {
                             }
                         }
 
-                        // Fill remaining cells in last row
+
                         if (week.size < 7) {
                             repeat(7 - week.size) {
                                 Spacer(
@@ -217,10 +220,10 @@ fun CalendarScreen() {
             }
         }
 
-        // Spacer between calendar and scan history
+
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Bottom Section: Scan History
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -229,10 +232,11 @@ fun CalendarScreen() {
                 .padding(4.dp)
         ) {
             Column {
-                // Scan History Header
+
                 Text(
                     text = "Monday 08, Dec",
-                    color = Color.White,
+                    color = colorResource(id = R.color.graycolor),
+                    fontFamily = FontFamily(Font(R.font.manrope_semibold)),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -241,22 +245,23 @@ fun CalendarScreen() {
 
                 Text(
                     text = "3 Scans Recorded",
-                    color = Color.LightGray,
+                    color = colorResource(id = R.color.graylightcolorAFAFAF),
+                    fontFamily = FontFamily(Font(R.font.manrope_regular)),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // LazyColumn for scan items
+
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(
                         listOf(
                             ScanData("07:32 AM", "Lactose: 2.0 mM", Color(0xFF2F8D91)),
-                            ScanData("07:32 AM", "Lactose: 2.0 mM", Color(0xFF2F8D91)),
-                            ScanData("07:37 AM", "Lactose: 2.0 mM", Color(0xFF2F8D91))
+                            ScanData("07:32 AM", "Lactose: 2.0 mM", Color(0xFFE03675)),
+                            ScanData("07:37 AM", "Lactose: 2.0 mM", Color(0xFF87E64C))
                         )
                     ) { scan ->
                         ScanItem(scan = scan)
@@ -274,28 +279,28 @@ fun ScanItem(scan: ScanData) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 2.dp) // Vertical spacing between cards
-            .clip(RoundedCornerShape(8.dp)) // Rounded corners to match the card
-            .background(Color(0xFF111111)) // Dark background color for the card
-            .padding(horizontal = 8.dp, vertical = 4.dp) // Inner padding for the card
+            .padding(vertical = 2.dp)
+            .clip(RoundedCornerShape(8.dp))
+            .background(Color(0xFF111111))
+            .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
-                    .width(4.dp) // Width of the vertical line
-                    .height(40.dp) // Height of the vertical line
-                    .background(scan.color) // Colored vertical line based on scan color
+                    .width(4.dp)
+                    .height(40.dp)
+                    .background(scan.color)
             )
-            Spacer(modifier = Modifier.width(12.dp)) // Space between the line and the time text
+            Spacer(modifier = Modifier.width(12.dp))
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(IntrinsicSize.Min) // Ensure the column takes minimum space
+                    .height(IntrinsicSize.Min)
             ) {
-                // Left side: Time with the colored pill
+
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -308,12 +313,9 @@ fun ScanItem(scan: ScanData) {
                     )
                 }
 
-                // Spacer to push the scan value to the bottom of the card
-
-                // Right side: Scan Value
                 Row(
-                    horizontalArrangement = Arrangement.Start, // Align scan value to the right
-                    modifier = Modifier.fillMaxWidth() // Ensure it takes full width
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
                         text = scan.value,

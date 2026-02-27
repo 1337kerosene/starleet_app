@@ -18,13 +18,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.app.starleet.R
 
 @Composable
 fun ScanScreen() {
@@ -33,9 +36,9 @@ fun ScanScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF0F0F0F))
-            .systemBarsPadding() // Avoids overlap with system UI elements (like status bar)
+            .systemBarsPadding()
             .padding(16.dp)
-            .padding(bottom = 50.dp)   // 👈 100dp bottom margin
+            .padding(bottom = 50.dp)
 
     ) {
 
@@ -47,10 +50,11 @@ fun ScanScreen() {
             // Top Title
             Text(
                 text = "Scan Lactate",
-                color = Color.White,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier.align(Alignment.Start)
+                modifier = Modifier.align(Alignment.Start),
+                color = colorResource(id = R.color.whitecolor),
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontFamily = FontFamily(Font(R.font.manrope_bold))
+                )
             )
 
             Spacer(modifier = Modifier.height(30.dp))
@@ -58,7 +62,8 @@ fun ScanScreen() {
             // Value Text
             Text(
                 text = "0.1 mM",
-                color = Color(0xFF4DD0E1),
+                color = colorResource(id = R.color.lightskyblue),
+                fontFamily = FontFamily(Font(R.font.manrope_semibold)),
                 fontSize = 26.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -67,7 +72,8 @@ fun ScanScreen() {
 
             Text(
                 text = "Lactate  (No Sweat)",
-                color = Color.LightGray,
+                color = colorResource(id = R.color.graycolor),
+                fontFamily = FontFamily(Font(R.font.manrope_semibold)),
                 fontSize = 12.sp
             )
 
@@ -90,7 +96,8 @@ fun ScanScreen() {
             ) {
                 Text(
                     text = "Start Scan",
-                    color = Color.White,
+                    color = colorResource(id = R.color.whitecolorFFFFF),
+                    fontFamily = FontFamily(Font(R.font.manrope_semibold)),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium
                 )

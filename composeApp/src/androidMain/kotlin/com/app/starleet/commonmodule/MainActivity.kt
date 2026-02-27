@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         controller.isAppearanceLightNavigationBars = false
 
         setContent {
-            DashboardContain()
+            AppNavHost()
         }
     }
 }

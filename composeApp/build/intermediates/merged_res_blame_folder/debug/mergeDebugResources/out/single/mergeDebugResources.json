@@ -1,0 +1,122 @@
+[
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_silent_icon.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/silent_icon.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/font_manrope_regular.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/font/manrope_regular.ttf"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/font_manrope_bold.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/font/manrope_bold.ttf"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/font_manrope_light.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/font/manrope_light.ttf"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_ic_back_arrow.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/ic_back_arrow.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_icon_sensor.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/icon_sensor.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/font_manrope_extralight.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/font/manrope_extralight.ttf"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/font_manrope_extrabold.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/font/manrope_extrabold.ttf"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_icon_wifi.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/icon_wifi.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/font_manrope_medium.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/font/manrope_medium.ttf"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_icon_calendar.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/icon_calendar.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_icon_setting.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/icon_setting.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_graterthen_icon.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/graterthen_icon.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/font_manrope_semibold.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/font/manrope_semibold.ttf"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_graterthenbig_icon.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/graterthenbig_icon.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/drawable_icon_home.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/drawable/icon_home.xml"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.app.starleet.composeApp-debug-49:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-51:/mipmap-mdpi/ic_launcher_round.png"
+    }
+]

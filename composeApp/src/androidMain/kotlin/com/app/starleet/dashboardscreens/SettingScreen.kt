@@ -1,21 +1,26 @@
-package com.app.starleet.ui.dashboard.screens
+package com.app.starleet.dashboardscreens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+
+import com.app.starleet.R
+
 import androidx.compose.ui.unit.sp
 
 @Composable
@@ -28,8 +33,8 @@ fun SettingScreen() {
             .fillMaxSize()
             .background(Color(0xFF000000))
             .padding(16.dp)
-            .systemBarsPadding() // Avoids overlap with system UI elements (like status bar)
-            .padding(bottom = 50.dp)   // 👈 100dp bottom margin
+            .systemBarsPadding()
+            .padding(bottom = 50.dp)
             .navigationBarsPadding()
     ) {
         Column(
@@ -38,7 +43,8 @@ fun SettingScreen() {
 
             Text(
                 text = "Settings",
-                color = Color.White,
+                color = colorResource(id = R.color.whitecolor),
+                fontFamily = FontFamily(Font(R.font.manrope_bold)),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -68,27 +74,25 @@ fun SettingScreen() {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
 
-                        // Preview-safe icon
                         Icon(
-                            imageVector = Icons.Default.Settings,
+                            painter = painterResource(id = R.drawable.silent_icon),
                             contentDescription = "Silent Mode",
-                            tint = Color.White,
+                            tint = Color.Unspecified,
                             modifier = Modifier.size(24.dp)
                         )
-
                         Spacer(modifier = Modifier.width(12.dp))
 
                         Column {
                             Text(
                                 text = "Silent Mode",
-                                color = Color.White,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Medium
+                                color = colorResource(id = R.color.whitecolor),
+                                fontFamily = FontFamily(Font(R.font.manrope_bold)),                                fontSize = 14.sp,
                             )
 
                             Text(
                                 text = if (isSilentMode) "On" else "Off",
-                                color = Color.LightGray,
+                                color = colorResource(id = R.color.graycolor),
+                                fontFamily = FontFamily(Font(R.font.manrope_medium)),
                                 fontSize = 12.sp
                             )
                         }
@@ -149,8 +153,8 @@ fun SettingScreen() {
 
                     Text(
                         text = "Slide to delete all data",
-                        color = Color(0xFFFF6B6B),
-                        fontSize = 14.sp
+                        color = colorResource(id = R.color.redmidfade),
+                        fontFamily = FontFamily(Font(R.font.manrope_semibold)),                            fontSize = 14.sp
                     )
                 }
             }

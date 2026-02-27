@@ -1,1 +1,1 @@
-/Users/kbs/.konan/kotlin-native-prebuilt-macos-x86_64-2.3.0
+C:\Users\Kbs\.konan\kotlin-native-prebuilt-windows-x86_64-2.3.0
