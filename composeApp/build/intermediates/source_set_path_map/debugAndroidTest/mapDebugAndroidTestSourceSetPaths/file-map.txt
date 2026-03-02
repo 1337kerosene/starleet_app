@@ -1,0 +1,5 @@
+com.app.starleet.test.composeApp-androidTest-0 D:\StarleetAppNew\composeApp\build\generated\res\resValues\androidTest\debug
+com.app.starleet.test.composeApp-updated_navigation_xml-1 D:\StarleetAppNew\composeApp\build\generated\updated_navigation_xml\debugAndroidTest
+com.app.starleet.test.composeApp-mergeDebugAndroidTestResources-2 D:\StarleetAppNew\composeApp\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.app.starleet.test.composeApp-mergeDebugAndroidTestResources-3 D:\StarleetAppNew\composeApp\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.app.starleet.test.composeApp-debugAndroidTest-4 D:\StarleetAppNew\composeApp\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

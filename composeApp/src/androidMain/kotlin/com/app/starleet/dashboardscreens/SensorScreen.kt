@@ -37,7 +37,7 @@ fun SensorScreen(onBiasClick: () -> Unit, oncalibrationClick: () -> Unit) {
     ) {
 
         Text(
-            text = "Sensor Calibration",
+            text = "Settings",
             color = colorResource(id = R.color.whitecolor),
             fontFamily = FontFamily(Font(R.font.manrope_bold)),
             fontSize = 20.sp,

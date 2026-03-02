@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app.starleet.R
+import com.app.starleet.viewmodel.LactateViewModel
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
@@ -41,10 +42,21 @@ import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CalendarScreen() {
+fun CalendarScreen(viewModel: LactateViewModel) {
+    val state by viewModel.state.collectAsState()
+
+
 
     var currentMonth by remember { mutableStateOf(YearMonth.now()) }
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
+
+
+    val start = getStartOfDay(selectedDate)
+    val end = getEndOfDay(selectedDate)
+
+    val scansForDay = state.history.filter {
+        it.timestamp in start until end
+    }
 
     val firstDayOfMonth = currentMonth.atDay(1)
     val daysInMonth = currentMonth.lengthOfMonth()
@@ -66,7 +78,7 @@ fun CalendarScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF000000)) // Black background
+            .background(Color(0xFF000000))
             .systemBarsPadding()
             .padding(16.dp)
     ) {
@@ -82,7 +94,6 @@ fun CalendarScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Calendar Box
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -229,14 +240,24 @@ fun CalendarScreen() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .weight(1f)
                 .clip(RoundedCornerShape(20.dp))
-
                 .padding(4.dp)
         ) {
-            Column {
+            Column(
+                modifier = Modifier.fillMaxSize()
+            ) {
 
                 Text(
-                    text = "Monday 08, Dec",
+                    text = selectedDate.dayOfWeek.getDisplayName(
+                        TextStyle.FULL,
+                        Locale.getDefault()
+                    ) + " " +
+                            selectedDate.dayOfMonth + ", " +
+                            selectedDate.month.getDisplayName(
+                                TextStyle.SHORT,
+                                Locale.getDefault()
+                            ),
                     color = colorResource(id = R.color.graycolor),
                     fontFamily = FontFamily(Font(R.font.manrope_semibold)),
                     fontSize = 18.sp,
@@ -246,7 +267,7 @@ fun CalendarScreen() {
                 Spacer(modifier = Modifier.height(3.dp))
 
                 Text(
-                    text = "3 Scans Recorded",
+                    text = "${scansForDay.size} Scans Recorded",
                     color = colorResource(id = R.color.graylightcolorAFAFAF),
                     fontFamily = FontFamily(Font(R.font.manrope_regular)),
                     fontSize = 14.sp,
@@ -255,22 +276,47 @@ fun CalendarScreen() {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-
                 LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(
-                        listOf(
-                            ScanData("07:32 AM", "Lactose: 2.0 mM", Color(0xFF2F8D91)),
-                            ScanData("07:32 AM", "Lactose: 2.0 mM", Color(0xFFE03675)),
-                            ScanData("07:37 AM", "Lactose: 2.0 mM", Color(0xFF87E64C))
-                        )
-                    ) { scan ->
-                        ScanItem(scan = scan)
+
+                    if (scansForDay.isEmpty()) {
+
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 20.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "No scans recorded",
+                                    color = Color.Gray
+                                )
+                            }
+                        }
+
+                    } else {
+
+                        items(scansForDay) { scan ->
+                            ScanItem(
+                                scan = ScanData(
+                                    time = formatTime(scan.timestamp),
+                                    value = "Lactate: ${scan.lactateValue} mM",
+                                    color = getColorForValue(scan.lactateValue)
+                                )
+                            )
+                        }
                     }
                 }
+
+
             }
         }
+
+        Spacer(modifier = Modifier.height(50.dp))
+
     }
 }
 
@@ -331,10 +377,35 @@ fun ScanItem(scan: ScanData) {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+private fun getStartOfDay(localDate: LocalDate): Long {
+    return localDate.atStartOfDay()
+        .atZone(java.time.ZoneId.systemDefault())
+        .toInstant()
+        .toEpochMilli()
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+private fun getEndOfDay(localDate: LocalDate): Long {
+    return localDate.plusDays(1)
+        .atStartOfDay()
+        .atZone(java.time.ZoneId.systemDefault())
+        .toInstant()
+        .toEpochMilli()
+}
+
+private fun getColorForValue(value: Double): Color {
+    return when {
+        value < 1.5 -> Color(0xFF2F8D91)
+        value < 3.0 -> Color(0xFFE03675)
+        else -> Color(0xFF87E64C)
+    }
+}
+/*
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun CalendarPreview() {
     MaterialTheme {
         CalendarScreen()
     }
-}
+}*/

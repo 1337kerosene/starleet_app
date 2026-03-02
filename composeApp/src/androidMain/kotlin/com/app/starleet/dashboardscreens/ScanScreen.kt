@@ -14,7 +14,11 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,9 +32,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app.starleet.R
+import com.app.starleet.intent.LactateIntent
+import com.app.starleet.viewmodel.LactateViewModel
+import kotlinx.coroutines.delay
 
 @Composable
-fun ScanScreen() {
+fun ScanScreen(viewModel: LactateViewModel) {
+
+    var isScanning by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -39,7 +48,6 @@ fun ScanScreen() {
             .systemBarsPadding()
             .padding(16.dp)
             .padding(bottom = 50.dp)
-
     ) {
 
         Column(
@@ -47,7 +55,6 @@ fun ScanScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // Top Title
             Text(
                 text = "Scan Lactate",
                 modifier = Modifier.align(Alignment.Start),
@@ -59,13 +66,11 @@ fun ScanScreen() {
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            // Value Text
             Text(
                 text = "0.1 mM",
                 color = colorResource(id = R.color.lightskyblue),
                 fontFamily = FontFamily(Font(R.font.manrope_semibold)),
-                fontSize = 26.sp,
-                fontWeight = FontWeight.SemiBold
+                fontSize = 26.sp
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -73,19 +78,27 @@ fun ScanScreen() {
             Text(
                 text = "Lactate  (No Sweat)",
                 color = colorResource(id = R.color.graycolor),
-                fontFamily = FontFamily(Font(R.font.manrope_semibold)),
                 fontSize = 12.sp
             )
 
             Spacer(modifier = Modifier.height(100.dp))
 
-            PulseAnimation()
+            PulseAnimation(isScanning)
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Start Scan Button
             Button(
-                onClick = { },
+                onClick = {
+                    isScanning = true
+
+                    viewModel.processIntent(
+                        LactateIntent.AddScan(
+                            value = 2.9,
+                            sweat = "No Sweat",
+                            change = 0.3
+                        )
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(55.dp)
@@ -95,21 +108,35 @@ fun ScanScreen() {
                 )
             ) {
                 Text(
-                    text = "Start Scan",
-                    color = colorResource(id = R.color.whitecolorFFFFF),
-                    fontFamily = FontFamily(Font(R.font.manrope_semibold)),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
+                    text = if (isScanning) "Scanning..." else "Start Scan",
+                    color = Color.White
                 )
             }
 
             Spacer(modifier = Modifier.height(40.dp))
         }
     }
+
+    LaunchedEffect(isScanning) {
+        if (isScanning) {
+            delay(2000)
+            isScanning = false
+        }
+    }
 }
 
 @Composable
-fun PulseAnimation() {
+fun PulseAnimation(isRunning: Boolean) {
+
+    if (!isRunning) {
+        Box(
+            Modifier
+                .size(120.dp)
+                .clip(CircleShape)
+                .background(Color(0xFF2BA39A).copy(alpha = 0.35f))
+        )
+        return
+    }
 
     val infinite = rememberInfiniteTransition(label = "")
 
@@ -142,14 +169,12 @@ fun PulseAnimation() {
 
     val green = Color(0xFF2BA39A)
 
-
     Box(contentAlignment = Alignment.Center) {
 
         PulseCircle(scale1, green.copy(alpha = 0.25f))
         PulseCircle(scale2, green.copy(alpha = 0.18f))
         PulseCircle(scale3, green.copy(alpha = 0.12f))
 
-        // center solid circle
         Box(
             Modifier
                 .size(120.dp)
@@ -173,10 +198,11 @@ private fun PulseCircle(scale: Float, color: Color) {
     )
 }
 
+/*
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ScanPreview() {
     MaterialTheme {
         ScanScreen()
     }
-}
+}*/

@@ -1,8 +1,10 @@
 package com.app.starleet.dashboardscreens
 
+import android.app.DatePickerDialog
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,38 +13,30 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.*
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.app.starleet.R
+import com.app.starleet.intent.LactateIntent
+import com.app.starleet.roomdb.LactateScanEntity
+import com.app.starleet.viewmodel.LactateViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
-
-data class ChartPoint(
-    val label: String,
-    val value: Float
-)
-
-data class HistoryItem(
-    val time: String,
-    val lactate: String
-)
-
+data class ChartPoint(val label: String, val value: Float)
+data class HistoryItem(val time: String, val lactate: String)
 data class TrendChartData(
     val title: String,
     val subtitle: String,
@@ -51,7 +45,10 @@ data class TrendChartData(
 )
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: LactateViewModel) {
+
+    val state by viewModel.state.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -60,6 +57,7 @@ fun HomeScreen() {
             .systemBarsPadding()
             .verticalScroll(rememberScrollState())
     ) {
+
         Text(
             text = "Overview",
             color = colorResource(id = R.color.whitecolor),
@@ -67,45 +65,200 @@ fun HomeScreen() {
             style = MaterialTheme.typography.titleLarge
         )
 
-        Spacer(modifier = Modifier.height(16.dp)) // Space between items
+        Spacer(modifier = Modifier.height(16.dp))
 
-        CurrentLactateCard()
-
-        Spacer(modifier = Modifier.height(16.dp)) // Space between items
-
-
-        val staticChartData = TrendChartData(
-            title = "Trend",
-            subtitle = "Last 7 scans",
-            points = arrayListOf(
-                ChartPoint("9 Jan", 0.6f),
-                ChartPoint("11 Jan", 1.8f),
-                ChartPoint("13 Jan", 1.5f),
-                ChartPoint("15 Jan", 1.0f),
-                ChartPoint("17 Jan", 2.9f),
-                ChartPoint("20 Jan", 3.0f),
-                ChartPoint("22 Jan", 3.8f)
-            ),
-            maxValue = 4f
-        )
-
-        TrendChartCard(staticChartData, modifier = Modifier)
+        CurrentLactateCard(state.current)
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        val historyList = arrayListOf(
-            HistoryItem("07:03", "0.0 mM"),
-            HistoryItem("07:32", "2.8 mM"),
-            HistoryItem("07:40", "2.9 mM"),
-            HistoryItem("07:48", "2.5 mM")
+        val trendPoints = ArrayList(
+            state.trend.map {
+                ChartPoint(
+                    label = formatDate(it.timestamp),
+                    value = it.lactateValue.toFloat()
+                )
+            }
         )
 
-        HistoryCard(historyList)
+        val maxValue = (
+                state.trend.maxOfOrNull { it.lactateValue }?.toFloat()
+                    ?: 1f
+                ).coerceAtLeast(1f)
 
+        TrendChartCard(
+            TrendChartData(
+                title = "Trend",
+                subtitle = "Last 7 scans",
+                points = trendPoints,
+                maxValue = maxValue
+            )
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        val filteredHistory = state.history.filter { entity ->
+
+            state.selectedDate?.let { selected ->
+
+                val start = getStartOfDay(selected)
+                val end = start + (24 * 60 * 60 * 1000)
+
+                entity.timestamp in start until end
+
+            } ?: true
+        }
+
+        val historyList = filteredHistory.map {
+            HistoryItem(
+                time = formatTime(it.timestamp),
+                lactate = "${it.lactateValue} mM"
+            )
+        }
+
+        HistoryCard(
+            items = historyList,
+            selectedDate = state.selectedDate,
+            viewModel = viewModel
+        )
         Spacer(modifier = Modifier.height(80.dp))
     }
 }
 
+@Composable
+fun HistoryCard(
+    items: List<HistoryItem>,
+    selectedDate: Long?,
+    viewModel: LactateViewModel
+) {
+
+    Column {
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Text(
+                text = "History",
+                color = colorResource(id = R.color.whitecolor),
+                fontFamily = FontFamily(Font(R.font.manrope_semibold)),
+                fontWeight = FontWeight.SemiBold
+            )
+
+
+                DateFilter(
+                    selectedDate = selectedDate,
+                    onDateSelected = {
+                        viewModel.processIntent(
+                            LactateIntent.SelectHistoryDate(it)
+                        )
+                    }
+                )
+
+
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    brush = Brush.linearGradient(
+                        listOf(
+                            Color(0xFF1B1E21),
+                            Color(0xFF1F2F2F)
+                        )
+                    ),
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .padding(vertical = 12.dp)
+        ) {
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Time",
+                    color = colorResource(id = R.color.graymidcolor),
+                    fontFamily = FontFamily(Font(R.font.manrope_medium)),
+                    fontSize = 14.sp
+                )
+                Text(
+                    text = "Lactate",
+                    color = colorResource(id = R.color.graymidcolor),
+                    fontFamily = FontFamily(Font(R.font.manrope_medium)),
+                    fontSize = 14.sp
+                )
+            }
+
+            DividerLine()
+
+            if (items.isEmpty()) {
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 40.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "No scans available for selected date",
+                        color = White.copy(alpha = 0.6f),
+                        fontSize = 14.sp,
+                        fontFamily = FontFamily(Font(R.font.manrope_medium))
+                    )
+                }
+
+            } else {
+
+                items.forEachIndexed { index, item ->
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp, vertical = 14.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+
+                        Text(
+                            text = item.time,
+                            color = White,
+                            fontSize = 16.sp
+                        )
+
+                        Spacer(modifier = Modifier.weight(1f))
+
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+
+                            Text(
+                                text = item.lactate,
+                                color = White,
+                                fontSize = 16.sp
+                            )
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Icon(
+                                imageVector = Icons.Default.KeyboardArrowRight,
+                                contentDescription = null,
+                                tint = White.copy(0.7f)
+                            )
+                        }
+                    }
+
+                    if (index != items.lastIndex) {
+                        DividerLine()
+                    }
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun TrendChartCard(
@@ -145,10 +298,28 @@ fun TrendChartCard(
 
             Spacer(Modifier.height(20.dp))
 
-            SmoothChart(
-                points = chartData.points,
-                maxValue = chartData.maxValue
-            )
+            if (chartData.points.isEmpty()) {
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 40.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "No trend data available",
+                        color = White.copy(alpha = 0.6f),
+                        fontSize = 14.sp
+                    )
+                }
+
+            } else {
+
+                SmoothChart(
+                    points = chartData.points,
+                    maxValue = chartData.maxValue
+                )
+            }
         }
     }
 }
@@ -159,15 +330,20 @@ private fun SmoothChart(
     maxValue: Float
 ) {
 
+    if (points.isEmpty()) return
+
+    val rawMax = points.maxOfOrNull { it.value } ?: 1f
+    val roundedMax = kotlin.math.ceil(rawMax).coerceAtLeast(1f)
+    val midValue = roundedMax / 2f
+
     Box(modifier = Modifier.fillMaxSize()) {
 
         Canvas(modifier = Modifier.fillMaxSize()) {
 
             val width = size.width
             val height = size.height
-
-            val spacing = width / (points.size - 1)
-
+            val spacing =
+                if (points.size > 1) width / (points.size - 1) else width
 
             val gridColor = White.copy(0.15f)
 
@@ -193,10 +369,9 @@ private fun SmoothChart(
                 )
             }
 
-            // CREATE SMOOTH PATH
             val chartPoints = points.mapIndexed { index, point ->
                 val x = spacing * index
-                val y = height - (point.value / maxValue) * height
+                val y = height - (point.value / roundedMax) * height
                 Offset(x, y)
             }
 
@@ -210,9 +385,7 @@ private fun SmoothChart(
             for (i in 0 until chartPoints.size - 1) {
                 val p1 = chartPoints[i]
                 val p2 = chartPoints[i + 1]
-
                 val controlX = (p1.x + p2.x) / 2
-
                 path.cubicTo(controlX, p1.y, controlX, p2.y, p2.x, p2.y)
                 fillPath.cubicTo(controlX, p1.y, controlX, p2.y, p2.x, p2.y)
             }
@@ -234,22 +407,32 @@ private fun SmoothChart(
             )
         }
 
-        // Y Axis dynamic
         Column(
-            modifier = Modifier.align(Alignment.CenterStart),
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .fillMaxHeight(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            val steps = 3
-            val stepValue = maxValue / (steps - 1)
-            for (i in steps - 1 downTo 0) {
-                Text(
-                    text = "${(stepValue * i).toInt()}m",
-                    color = White.copy(0.6f),
-                    fontSize = 12.sp
-                )
-            }
+            Text(
+                text = "${roundedMax.toInt()}mM",
+                color = White.copy(0.6f),
+                fontSize = 12.sp
+            )
+
+            Text(
+                text = "${midValue.toInt()}mM",
+                color = White.copy(0.6f),
+                fontSize = 12.sp
+            )
+
+            Text(
+                text = "0mM",
+                color = White.copy(0.6f),
+                fontSize = 12.sp
+            )
         }
 
+        val uniqueLabels = points.map { it.label }.distinct()
 
         Row(
             modifier = Modifier
@@ -257,27 +440,36 @@ private fun SmoothChart(
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            points.forEach {
+            if (uniqueLabels.size == 1) {
+                Spacer(modifier = Modifier.weight(1f))
                 Text(
-                    text = it.label,
+                    text = uniqueLabels.first(),
                     color = White.copy(0.6f),
                     fontSize = 12.sp
                 )
+                Spacer(modifier = Modifier.weight(1f))
+            } else {
+                uniqueLabels.forEach {
+                    Text(
+                        text = it,
+                        color = White.copy(0.6f),
+                        fontSize = 12.sp
+                    )
+                }
             }
         }
     }
 }
 
+
 @Composable
-fun CurrentLactateCard() {
+fun CurrentLactateCard(current: LactateScanEntity?) {
 
     val cardShape = RoundedCornerShape(15.dp)
 
     Card(
         shape = cardShape,
-        colors = CardDefaults.cardColors(
-            containerColor = Color.Transparent
-        ),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
         modifier = Modifier
             .fillMaxWidth()
             .shadow(4.dp, shape = cardShape)
@@ -289,10 +481,7 @@ fun CurrentLactateCard() {
             )
     ) {
 
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-
+        Column(modifier = Modifier.padding(16.dp)) {
 
             Text(
                 text = "Current Lactate",
@@ -303,12 +492,10 @@ fun CurrentLactateCard() {
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
 
                 Text(
-                    text = "0.1 mM",
+                    text = "${current?.lactateValue ?: 0.0} mM",
                     fontSize = 30.sp,
                     color = colorResource(id = R.color.whitecolor),
                     fontFamily = FontFamily(Font(R.font.manrope_semibold))
@@ -317,7 +504,7 @@ fun CurrentLactateCard() {
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Text(
-                    text = "No Sweat",
+                    text = current?.sweatStatus ?: "No Sweat",
                     fontSize = 12.sp,
                     color = colorResource(id = R.color.graycolor),
                     fontFamily = FontFamily(Font(R.font.manrope_regular))
@@ -327,138 +514,11 @@ fun CurrentLactateCard() {
             Spacer(modifier = Modifier.height(6.dp))
 
             Text(
-                text = "↓ 0.3 mM vs Last scan",
+                text = "↓ ${current?.changeFromLast ?: 0.0} mM vs Last scan",
                 fontSize = 12.sp,
                 color = colorResource(id = R.color.graycolor),
                 fontFamily = FontFamily(Font(R.font.manrope_regular))
             )
-        }
-    }
-}
-
-@Composable
-fun HistoryCard(
-    items: List<HistoryItem>
-) {
-
-    Column(
-
-    ) {
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Text(
-                text = "History",
-                color = colorResource(id = R.color.whitecolor),
-                fontFamily = FontFamily(Font(R.font.manrope_semibold)),
-                fontWeight = FontWeight.SemiBold
-            )
-
-
-            Row(
-                modifier = Modifier
-                    .border(
-                        width = 1.dp,
-                        color = White.copy(alpha = 0.2f),
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    .padding(horizontal = 12.dp, vertical = 6.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Today",
-                    color = colorResource(id = R.color.graylightcolorAFAFAF),
-                    fontFamily = FontFamily(Font(R.font.manrope_medium)),                          fontSize = 14.sp
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = null,
-                    tint = White
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    brush = Brush.linearGradient(
-                        listOf(
-                            Color(0xFF1B1E21),
-                            Color(0xFF1F2F2F)
-                        )
-                    ),
-                    shape = RoundedCornerShape(20.dp)
-                )
-                .padding(vertical = 12.dp)
-        ) {
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Time",
-                    color = colorResource(id = R.color.graymidcolor),
-                    fontFamily = FontFamily(Font(R.font.manrope_medium)),                    fontSize = 14.sp
-                )
-                Text(
-                    text = "Lactate",
-                    color = colorResource(id = R.color.graymidcolor),
-                    fontFamily = FontFamily(Font(R.font.manrope_medium)),                          fontSize = 14.sp
-                )
-            }
-
-            DividerLine()
-
-            items.forEachIndexed { index, item ->
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 14.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    Text(
-                        text = item.time,
-                        color = White,
-                        fontSize = 16.sp
-                    )
-
-                    Spacer(modifier = Modifier.weight(1f))
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-
-                        Text(
-                            text = item.lactate,
-                            color = White,
-                            fontSize = 16.sp
-                        )
-
-                        Spacer(modifier = Modifier.width(8.dp))
-
-                        Icon(
-                            imageVector = Icons.Default.KeyboardArrowRight,
-                            contentDescription = null,
-                            tint = White.copy(0.7f)
-                        )
-                    }
-                }
-
-                if (index != items.lastIndex) {
-                    DividerLine()
-                }
-            }
         }
     }
 }
@@ -473,10 +533,73 @@ private fun DividerLine() {
     )
 }
 
-@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun DashboardPreview() {
-    MaterialTheme {
-        HomeScreen()
+fun DateFilter(
+    selectedDate: Long?,
+    onDateSelected: (Long) -> Unit
+) {
+
+    val context = LocalContext.current
+
+    val dateText = selectedDate?.let {
+        java.text.SimpleDateFormat("dd MMM yyyy", java.util.Locale.getDefault())
+            .format(java.util.Date(it))
+    } ?: "Select Date"
+
+    Row(
+        modifier = Modifier
+            .border(
+                width = 1.dp,
+                color = White.copy(alpha = 0.2f),
+                shape = RoundedCornerShape(10.dp)
+            )
+            .clickable {
+
+                val cal = java.util.Calendar.getInstance()
+
+                DatePickerDialog(
+                    context,
+                    { _, year, month, day ->
+                        cal.set(year, month, day)
+                        onDateSelected(cal.timeInMillis)
+                    },
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH)
+                ).show()
+
+            }
+            .padding(horizontal = 12.dp, vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Text(
+            text = dateText,
+            color = White,
+            fontSize = 14.sp
+        )
+
+        Spacer(modifier = Modifier.width(4.dp))
+
+        Icon(Icons.Default.KeyboardArrowDown, null, tint = White)
     }
+}
+
+private fun getStartOfDay(time: Long): Long {
+    val cal = Calendar.getInstance()
+    cal.timeInMillis = time
+    cal.set(Calendar.HOUR_OF_DAY, 0)
+    cal.set(Calendar.MINUTE, 0)
+    cal.set(Calendar.SECOND, 0)
+    cal.set(Calendar.MILLISECOND, 0)
+    return cal.timeInMillis
+}
+fun formatTime(timestamp: Long): String {
+    val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+    return sdf.format(Date(timestamp))
+}
+
+fun formatDate(timestamp: Long): String {
+    val sdf = SimpleDateFormat("dd MMM", Locale.getDefault())
+    return sdf.format(Date(timestamp))
 }

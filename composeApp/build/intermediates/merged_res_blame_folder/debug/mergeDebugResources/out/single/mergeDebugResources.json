@@ -1,130 +1,130 @@
 [
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\font_manrope_extrabold.ttf.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\font\\manrope_extrabold.ttf"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_ic_back_arrow.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/ic_back_arrow.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\font_manrope_extralight.ttf.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\font\\manrope_extralight.ttf"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable-v24/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/font_manrope_bold.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/font/manrope_bold.ttf"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_back_calendar_icon.xml.flat",
+        "source": "com.app.starleet.composeApp-main-54:/drawable/back_calendar_icon.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_ic_back_arrow.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\ic_back_arrow.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/font_manrope_extrabold.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/font/manrope_extrabold.ttf"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_silent_icon.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/silent_icon.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_silent_icon.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\silent_icon.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.app.starleet.composeApp-debug-49:/drawable_go_calendar_icon.xml.flat",
-        "source": "com.app.starleet.composeApp-main-53:/drawable/go_calendar_icon.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/font_manrope_regular.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/font/manrope_regular.ttf"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_icon_calendar.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\icon_calendar.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\font_manrope_bold.ttf.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\font\\manrope_bold.ttf"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_icon_wifi.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\icon_wifi.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_icon_home.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/icon_home.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-xxhdpi\\ic_launcher_round.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\ic_launcher_background.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/font_manrope_medium.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/font/manrope_medium.ttf"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_icon_sensor.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\icon_sensor.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-mdpi\\ic_launcher_round.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-xhdpi\\ic_launcher_round.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_icon_setting.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\icon_setting.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_go_calendar_icon.xml.flat",
+        "source": "com.app.starleet.composeApp-main-54:/drawable/go_calendar_icon.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_icon_home.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\icon_home.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/font_manrope_semibold.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/font/manrope_semibold.ttf"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\font_manrope_semibold.ttf.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\font\\manrope_semibold.ttf"
+        "merged": "com.app.starleet.composeApp-debug-50:/font_manrope_light.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/font/manrope_light.ttf"
     },
     {
-        "merged": "com.app.starleet.composeApp-debug-49:/drawable_back_calendar_icon.xml.flat",
-        "source": "com.app.starleet.composeApp-main-53:/drawable/back_calendar_icon.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_icon_wifi.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/icon_wifi.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-hdpi\\ic_launcher_round.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\font_manrope_regular.ttf.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\font\\manrope_regular.ttf"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_icon_sensor.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/icon_sensor.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable-v24\\ic_launcher_foreground.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/font_manrope_extralight.ttf.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/font/manrope_extralight.ttf"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\font_manrope_light.ttf.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\font\\manrope_light.ttf"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_icon_setting.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/icon_setting.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_graterthenbig_icon.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\graterthenbig_icon.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_icon_calendar.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/icon_calendar.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\font_manrope_medium.ttf.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\font\\manrope_medium.ttf"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_graterthen_icon.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/graterthen_icon.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-xxxhdpi\\ic_launcher_round.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "com.app.starleet.composeApp-debug-50:/drawable_graterthenbig_icon.xml.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/drawable/graterthenbig_icon.xml"
     },
     {
-        "merged": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-debug-49:\\drawable_graterthen_icon.xml.flat",
-        "source": "C:\\Users\\Kbs\\.gradle\\daemon\\8.14.3\\com.app.starleet.composeApp-androidMain-51:\\drawable\\graterthen_icon.xml"
+        "merged": "com.app.starleet.composeApp-debug-50:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.app.starleet.composeApp-androidMain-52:/mipmap-xhdpi/ic_launcher.png"
     }
 ]

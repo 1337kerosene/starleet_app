@@ -1,11 +1,12 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.ksp)
+
 }
 
 kotlin {
@@ -21,6 +22,10 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation("androidx.compose.material:material-icons-extended:1.1.0")
             implementation("androidx.navigation:navigation-compose:2.7.7")
+            implementation("androidx.room:room-runtime:2.8.4")
+            implementation("androidx.room:room-ktx:2.8.4")
+            implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -68,5 +73,7 @@ android {
 
 dependencies {
     debugImplementation(libs.compose.uiTooling)
+    add("kspAndroid", "androidx.room:room-compiler:2.8.4")
+
 }
 

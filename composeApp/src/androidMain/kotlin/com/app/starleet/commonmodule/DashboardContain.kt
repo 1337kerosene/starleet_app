@@ -11,6 +11,7 @@ import com.app.starleet.dashboardscreens.HomeScreen
 import com.app.starleet.dashboardscreens.ScanScreen
 import com.app.starleet.dashboardscreens.SensorScreen
 import com.app.starleet.dashboardscreens.SettingScreen
+import com.app.starleet.viewmodel.LactateViewModel
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -19,14 +20,14 @@ fun DashboardContain(
     selectedIndex: Int,
     onTabSelected: (Int) -> Unit,
     onBiasClick: () -> Unit,
-    oncalibrationClick: () -> Unit
+    oncalibrationClick: () -> Unit,
+    viewModel: LactateViewModel
 ) {
 
     val items = listOf(
         BottomNavigationItemData("Home", R.drawable.icon_home, R.drawable.icon_home),
         BottomNavigationItemData("Calendar", R.drawable.icon_calendar, R.drawable.icon_calendar),
         BottomNavigationItemData("Profile", R.drawable.icon_wifi, R.drawable.icon_wifi),
-        BottomNavigationItemData("Sensor", R.drawable.icon_sensor, R.drawable.icon_sensor),
         BottomNavigationItemData("Setting", R.drawable.icon_setting, R.drawable.icon_setting),
     )
 
@@ -42,14 +43,13 @@ fun DashboardContain(
     ) { padding ->
 
         when (selectedIndex) {
-            0 -> HomeScreen()
-            1 -> CalendarScreen()
-            2 -> ScanScreen()
+            0 -> HomeScreen(viewModel)
+            1 -> CalendarScreen(viewModel)
+            2 -> ScanScreen(viewModel)
             3 -> SensorScreen(
                 onBiasClick = onBiasClick,
                 oncalibrationClick = oncalibrationClick
             )
-            4 -> SettingScreen()
         }
     }
 }

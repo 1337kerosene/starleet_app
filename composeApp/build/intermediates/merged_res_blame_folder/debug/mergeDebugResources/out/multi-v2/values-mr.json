@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.app.starleet.composeApp-mergeDebugResources-47:/values-mr/values-mr.xml",
+            "outputFile": "com.app.starleet.composeApp-mergeDebugResources-48:/values-mr/values-mr.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\775e85842ebf2d44fa78ecfcaf11ad88\\transformed\\core-1.16.0\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\32c2ba8dd0011c5ab4e5d0c238bdffc7\\transformed\\core-1.16.0\\res\\values-mr\\values-mr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,24 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\2a207a24cb51039920a91e7e0c06e243\\transformed\\foundation\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\a966b1ce936dafa25a4603f8ca206cc5\\transformed\\ui\\res\\values-mr\\values-mr.xml",
                     "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,157,242",
-                        "endColumns": "101,84,84",
-                        "endOffsets": "152,237,322"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,199,293,375,472,570,657,743,828,917,1000,1080,1165,1236,1320,1396,1472,1548,1624,1690",
+                        "endColumns": "93,93,81,96,97,86,85,84,88,82,79,84,70,83,75,75,75,75,65,117",
+                        "endOffsets": "194,288,370,467,565,652,738,823,912,995,1075,1160,1231,1315,1391,1467,1543,1619,1685,1803"
                     },
                     "to": {
-                        "startLines": "2,99,100",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "105,10139,10224",
-                        "endColumns": "101,84,84",
-                        "endOffsets": "202,10219,10304"
+                        "startLines": "3,11,12,13,14,15,16,17,86,87,88,89,90,91,92,93,94,96,97,98",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "207,1033,1127,1209,1306,1404,1491,1577,9058,9147,9230,9310,9395,9466,9550,9626,9702,9879,9955,10021",
+                        "endColumns": "93,93,81,96,97,86,85,84,88,82,79,84,70,83,75,75,75,75,65,117",
+                        "endOffsets": "296,1122,1204,1301,1399,1486,1572,1657,9142,9225,9305,9390,9461,9545,9621,9697,9773,9950,10016,10134"
                     }
                 },
                 {
-                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\35c1a83ea957460e96207920a9d5265d\\transformed\\material3\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\bf3d7b3485baee24e11c515122011b2b\\transformed\\material3\\res\\values-mr\\values-mr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\2348d7db4964dbcf281995be868f7840\\transformed\\ui\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\e963cb9d0caaff93f3ce20312e98be52\\transformed\\foundation\\res\\values-mr\\values-mr.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,199,293,375,472,570,657,743,828,917,1000,1080,1165,1236,1320,1396,1472,1548,1624,1690",
-                        "endColumns": "93,93,81,96,97,86,85,84,88,82,79,84,70,83,75,75,75,75,65,117",
-                        "endOffsets": "194,288,370,467,565,652,738,823,912,995,1075,1160,1231,1315,1391,1467,1543,1619,1685,1803"
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,157,242",
+                        "endColumns": "101,84,84",
+                        "endOffsets": "152,237,322"
                     },
                     "to": {
-                        "startLines": "3,11,12,13,14,15,16,17,86,87,88,89,90,91,92,93,94,96,97,98",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "207,1033,1127,1209,1306,1404,1491,1577,9058,9147,9230,9310,9395,9466,9550,9626,9702,9879,9955,10021",
-                        "endColumns": "93,93,81,96,97,86,85,84,88,82,79,84,70,83,75,75,75,75,65,117",
-                        "endOffsets": "296,1122,1204,1301,1399,1486,1572,1657,9142,9225,9305,9390,9461,9545,9621,9697,9773,9950,10016,10134"
+                        "startLines": "2,99,100",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "105,10139,10224",
+                        "endColumns": "101,84,84",
+                        "endOffsets": "202,10219,10304"
                     }
                 }
             ]

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.app.starleet.composeApp-mergeDebugResources-47:/values-v21/values-v21.xml",
+            "outputFile": "com.app.starleet.composeApp-mergeDebugResources-48:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\775e85842ebf2d44fa78ecfcaf11ad88\\transformed\\core-1.16.0\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\Kbs\\.gradle\\caches\\8.14.3\\transforms\\32c2ba8dd0011c5ab4e5d0c238bdffc7\\transformed\\core-1.16.0\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
