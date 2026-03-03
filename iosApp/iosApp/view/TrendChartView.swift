@@ -1,25 +1,41 @@
 import SwiftUI
 import Charts
-
-struct TrendChartView: View {
     struct TrendData: Identifiable {
         let id = UUID()
         let date: Date
         let value: Double
     }
-    let data: [TrendData] = {
-        let calendar = Calendar.current
-        return [
-            .init(date: calendar.date(from: DateComponents(year: 2026, month: 1, day: 9))!, value: 0.8),
-            .init(date: calendar.date(from: DateComponents(year: 2026, month: 1, day: 11))!, value: 1.5),
-            .init(date: calendar.date(from: DateComponents(year: 2026, month: 1, day: 13))!, value: 1.8),
-            .init(date: calendar.date(from: DateComponents(year: 2026, month: 1, day: 15))!, value: 1.2),
-            .init(date: calendar.date(from: DateComponents(year: 2026, month: 1, day: 17))!, value: 1.0),
-            .init(date: calendar.date(from: DateComponents(year: 2026, month: 1, day: 19))!, value: 2.8),
-            .init(date: calendar.date(from: DateComponents(year: 2026, month: 1, day: 21))!, value: 3.2),
-            .init(date: calendar.date(from: DateComponents(year: 2026, month: 1, day: 23))!, value: 3.6)
-        ]
-    }()
+struct TrendChartView: View {
+    
+    @StateObject var viewModel: LactateViewModel
+    
+    var trendChartData: [TrendData] {
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2 // Monday
+
+        let today = Date()
+
+        // Get start of week (Monday)
+        let weekInterval = calendar.dateInterval(of: .weekOfYear, for: today)!
+        let startOfWeek = weekInterval.start
+
+        // Generate Monday → Sunday
+        let weekDays = (0..<7).compactMap {
+            calendar.date(byAdding: .day, value: $0, to: startOfWeek)
+        }
+
+        // Group scans by day
+        let grouped = Dictionary(grouping: viewModel.state.trend) {
+            calendar.startOfDay(for: $0.timestamp)
+        }
+
+        return weekDays.map { day in
+            let scans = grouped[calendar.startOfDay(for: day)] ?? []
+            let value = scans.last?.lactateValue ?? 0
+
+            return TrendData(date: day, value: value)
+        }
+    }
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack{
@@ -31,7 +47,7 @@ struct TrendChartView: View {
                     .foregroundColor(.white.opacity(0.6))
             }
             Chart {
-                ForEach(data) { item in
+                ForEach(trendChartData) { item in
                     AreaMark(
                         x: .value("Date", item.date),
                         yStart: .value("Start", 0),
@@ -49,17 +65,15 @@ struct TrendChartView: View {
                             endPoint:.bottomLeading
                         )
                     )
-
-                    
                 }
             }
             .chartXScale(range: .plotDimension(padding: 0))
             .chartYScale(domain: 0...4)
             .chartXAxis {
-                AxisMarks(values: .stride(by: .day, count: 4)) { value in
+                AxisMarks(values: trendChartData.map { $0.date }) { value in
                     AxisGridLine(stroke: StrokeStyle(lineWidth: 1, dash: [5]))
                         .foregroundStyle(.white.opacity(0.2))
-                    
+
                     AxisValueLabel(format: .dateTime.day().month(.abbreviated))
                         .foregroundStyle(.white)
                 }

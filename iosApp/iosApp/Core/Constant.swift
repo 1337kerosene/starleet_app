@@ -107,11 +107,12 @@ extension Font {
 }
 
 
-func formatDate(_ ts: Int64) -> String {
-    let date = Date(timeIntervalSince1970: Double(ts) / 1000)
+ func formatDate(_ date: Date) -> String {
     let formatter = DateFormatter()
     formatter.dateFormat = "dd MMM"
     return formatter.string(from: date)
+     
+     
 }
 
 func formatDateKey(_ ts: Int64) -> String {
@@ -191,3 +192,8 @@ let last7Days: [String] = {
 }()
 
 
+ let timeFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "hh:mm a"
+    return formatter
+}()

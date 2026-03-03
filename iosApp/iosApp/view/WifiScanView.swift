@@ -4,9 +4,12 @@
 //  Created by KBS on 2/25/26.
 //
 import SwiftUI
+import SwiftData
+
  struct WifiScanView: View {
  @State private var mMvalue = 0.1
  @State private var title = "Lactate"
+     
 var formattedValue: String {
     String(format: "%.1f", mMvalue)
 }
@@ -36,8 +39,31 @@ var formattedValue: String {
 
 struct PulseButton: View {
     @State private var animate = false
+    
+    @Environment(\.modelContext) private var context
+    @StateObject private var viewModel: LactateViewModel
+    
+    @Query(sort: \LactateScan.timestamp, order: .reverse)
+    private var scans: [LactateScan]
+    
+    init(context: ModelContext? = nil) {
+        // Temporary dummy init (real one happens in body)
+        _viewModel = StateObject(
+            wrappedValue: LactateViewModel(
+                repository: LactateRepository(
+                    context: ModelContext(
+                        try! ModelContainer(for: LactateScan.self)
+                    )
+                )
+            )
+        )
+    }
 
+    
+    
     var body: some View {
+        let repo = LactateRepository(context: context)
+
         VStack {
             Button(action: {
                 print("Tapped")
@@ -71,8 +97,14 @@ struct PulseButton: View {
                 Button {
                     if animate {
                         animate = false
+                        viewModel.processIntent(
+                                            .addScan(value: 2.9,
+                                                     sweat: "No Sweat",
+                                                     change: 0.3)
+                                        )
                     } else {
                         animate = true
+                       
                     }
                 } label: {
                     Text(animate ? "Stop Scan" : "Start Scan")
@@ -87,5 +119,8 @@ struct PulseButton: View {
             .padding()
             .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .bottom)
         }
+        .onAppear {
+                   viewModel.processIntent(.loadLactate)
+            }
     }
 }

@@ -14,7 +14,7 @@ struct SensorCalibrationView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Sensor Calibration")
+            Text("Settings")
                 .font(.headingManron)
                 .foregroundStyle(Color.white)
                 .padding(.horizontal)

@@ -7,6 +7,8 @@
 import SwiftUI
 struct Tabview: View {
     @State private var selectedTab = 0
+    @Environment(\.modelContext) private var context
+
     var body: some View {
         ZStack (alignment: .bottom){
             Color.bg
@@ -15,9 +17,9 @@ struct Tabview: View {
                 ZStack {
                     switch selectedTab {
                     case 0:
-                    HomeView()
+                        HomeView(context: context)
                     case 1:
-                        ScanHistoryView()
+                        ScanHistoryView(context: context)
                         
                     case 2:
                         WifiScanView()

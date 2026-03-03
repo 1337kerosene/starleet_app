@@ -1,5 +1,15 @@
 import SwiftUI
+import SwiftData
+
 struct ScanHistoryView : View {
+    @StateObject private var viewModel: LactateViewModel
+    init(context: ModelContext) {
+        _viewModel = StateObject(
+            wrappedValue: LactateViewModel(
+                repository: LactateRepository(context: context)
+            )
+        )
+    }
     var body: some View {
         ScrollView(showsIndicators: false){
             VStack(alignment: .leading ){
@@ -10,16 +20,19 @@ struct ScanHistoryView : View {
                 }
                 .padding()
                 .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .topLeading)
-                CalenderView()
-                ScansRecordedView()
+                CalenderView(viewModel:viewModel)
+                ScansRecordedView(viewModel: viewModel)
             }
         }
     }
 }
 struct CalenderView: View {
     @State private var currentMonth = Date()
-    @State private var selectedDate = Date()
-        private let calendar = Calendar.current
+    @State private var selectedDate: Date? = nil
+
+    private let calendar = Calendar.current
+    @StateObject var viewModel: LactateViewModel
+
         var body: some View {
         VStack(spacing: 16) {
             HStack {
@@ -37,7 +50,7 @@ struct CalenderView: View {
                         .fill(Color(argb: 0xff2B2B2B))
                 )
                 Spacer()
-                                Text(monthYearString(from: currentMonth))
+                     Text(monthYearString(from: currentMonth))
                     .foregroundColor(.white)
                     .font(.headline)
                 
@@ -128,7 +141,7 @@ struct CalenderView: View {
         return days
     }
         private func dayView(for date: Date) -> some View {
-        let isSelected = calendar.isDate(date, inSameDayAs: selectedDate)
+            let isSelected = calendar.isDate(date, inSameDayAs: selectedDate ?? Date())
         return Text("\(calendar.component(.day, from: date))")
             .foregroundColor(isSelected ? .white : .gray)
             .frame(maxWidth: .infinity, minHeight: 40)
@@ -143,23 +156,26 @@ struct CalenderView: View {
             )
             .onTapGesture {
                 selectedDate = date
+                viewModel.processIntent(.selectHistoryDate(date))
             }
     }
 }
 struct ScansRecordedView:View {
-    let sampleData: [LactateEntry] = [
-        LactateEntry(time: "07:32 AM", value: 2.0, color: Color.greenBg),
-        LactateEntry(time: "07:32 AM", value: 2.0, color: Color.lightPink),
-        LactateEntry(time: "07:32 AM", value: 2.0, color: .green)
-    ]
+
+    @StateObject var viewModel: LactateViewModel
     var body: some View {
+        let selectedDate = viewModel.state.selectedDate ?? Date()
         VStack(alignment: .leading,spacing:20){
             VStack(spacing: 5) {
-                Text("Monday 16, Dec")
+                Text(selectedDate.formatted(
+                    .dateTime.weekday(.wide)
+                    .day()
+                    .month(.abbreviated)
+                ))
                     .foregroundStyle(.white)
                     .font(.headingManron)
                     .frame(maxWidth: .infinity,alignment: .leading)
-                Text("3 Scans Recorded")
+                Text("\(viewModel.state.history.count) Scans Recorded")
                     .foregroundStyle(.gray)
                     .font(.mediumManron)
                     .frame(maxWidth: .infinity,alignment: .leading)
@@ -167,31 +183,29 @@ struct ScansRecordedView:View {
             .padding(.horizontal,20)
  
             VStack(spacing: 16) {
-                ForEach(sampleData) { item in
-                    LactoseRow(entry: item)
+                ForEach(viewModel.state.history) { item in
+                    HStack(spacing: 12) {
+                        RoundedRectangle(cornerRadius: 3)
+                            .fill(Color(
+                                red: Double.random(in: 0.3...1),
+                                green: Double.random(in: 0.3...1),
+                                blue: Double.random(in: 0.3...1)
+                            ))
+                         .frame(width: 4, height: 50)
+                         VStack(alignment: .leading, spacing: 6) {
+                            Text("\(timeFormatter.string(from: item.timestamp))")
+                                .foregroundColor(.white.opacity(0.6))
+                                .font(.system(size: 14))
+                            Text("Lactate: \(String(format: "%.1f mM", item.lactateValue))")
+                                .foregroundColor(.white.opacity(0.6))
+                                .font(.system(size: 18, weight: .medium))
+                        }
+                        Spacer()
+                    }
+                    .padding(.vertical, 10)
                 }
             }
             .padding()
         }
-    }
-}
-struct LactoseRow: View {
-    let entry: LactateEntry
-    var body: some View {
-        HStack(spacing: 12) {
-            RoundedRectangle(cornerRadius: 3)
-                .fill(entry.color)
-                .frame(width: 4, height: 50)
-            VStack(alignment: .leading, spacing: 6) {
-                Text(entry.time)
-                    .foregroundColor(.white.opacity(0.6))
-                    .font(.system(size: 14))
-                Text("Lactate: \(entry.value, specifier: "%.1f") mM")
-                    .foregroundColor(.white.opacity(0.6))
-                    .font(.system(size: 18, weight: .medium))
-            }
-            Spacer()
-        }
-        .padding(.vertical, 10)
     }
 }

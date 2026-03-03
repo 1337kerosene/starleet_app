@@ -8,5 +8,7 @@ struct iOSApp: App {
                 Tabview()
             }
         }
+        .modelContainer(for: LactateScan.self)
+
     }
 }
